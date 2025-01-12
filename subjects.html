@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adaptive Learning Platform</title>
+
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styles */
+        body {
+            background-color: #f4f7fc;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Subject Section */
+        .subjects-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .subject-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            font-size: 1.2rem;
+            margin: 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 200px;
+        }
+
+        .subject-btn:hover {
+            background-color: #45a049;
+        }
+
+        .subject-btn:active {
+            background-color: #3e8e41;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            display: none;
+        }
+
+        .quiz-question {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .quiz-options label {
+            display: block;
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+
+        .quiz-options input {
+            margin-right: 10px;
+        }
+
+        .quiz-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quiz-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            display: none;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            background-color: #f4f7fc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .subject-btn {
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            .quiz-section {
+                padding: 1.5rem;
+                width: 90%;
+            }
+
+            .quiz-btn {
+                width: 100%;
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var selectedSubject = ""; // Global variable to store the selected subject
+            var quizData = {}; // Initialize quizData
+
+            $(".subject-btn").click(function () {
+                selectedSubject = $(this).text(); // Store the selected subject
+                loadSubject(selectedSubject);
+            });
+
+            // Function to simulate subject selection and show quiz
+            function loadSubject(subject) {
+                var subjectDescriptions = {
+                    "Business": "Business subjects are great for aspiring entrepreneurs! Learn the fundamentals of managing organizations, marketing, and finance.",
+                    "Engineering": "Engineering is a broad field. Explore various branches like mechanical, civil, and electrical engineering.",
+                    "Computer Science": "Computer Science is a vast field! Whether you're interested in programming, data science, or machine learning, we've got you covered."
+                };
+
+                alert("You selected: " + subject + "\n" + subjectDescriptions[subject]);
+
+                $(".quiz-section").show();
+                $(".feedback-section").hide();
+                loadQuiz(subject);
+            }
+
+            function loadQuiz(subject) {
+                quizData = {
+                    "Business": [
+                        {
+                            question: "What is the primary goal of marketing?",
+                            options: ["To increase sales", "To create a brand", "To hire employees", "To handle finances"],
+                            correct: "To increase sales"
+                        },
+                        {
+                            question: "Which financial statement shows a company's profitability?",
+                            options: ["Balance Sheet", "Cash Flow Statement", "Income Statement", "Statement of Changes in Equity"],
+                            correct: "Income Statement"
+                        }
+                    ],
+                    "Engineering": [
+                        {
+                            question: "What does a civil engineer typically design?",
+                            options: ["Buildings", "Software", "Electrical circuits", "Machines"],
+                            correct: "Buildings"
+                        },
+                        {
+                            question: "What is a key focus of mechanical engineering?",
+                            options: ["Fluid dynamics", "Software development", "Digital marketing", "Genetics"],
+                            correct: "Fluid dynamics"
+                        }
+                    ],
+                    "Computer Science": [
+                        {
+                            question: "What is the main function of an operating system?",
+                            options: ["Manage hardware resources", "Create websites", "Write code", "Market products"],
+                            correct: "Manage hardware resources"
+                        },
+                        {
+                            question: "Which language is commonly used for web development?",
+                            options: ["Python", "C++", "JavaScript", "Java"],
+                            correct: "JavaScript"
+                        }
+                    ]
+                };
+
+                var quiz = quizData[subject];
+                var quizContainer = $(".quiz-section");
+                quizContainer.empty();
+
+                quiz.forEach(function (item, index) {
+                    quizContainer.append(`
+                        <div class="quiz-question">${item.question}</div>
+                        <div class="quiz-options">
+                            ${item.options.map(function(option) {
+                                return `<label><input type="radio" name="q${index}" value="${option}"> ${option}</label>`;
+                            }).join('')}
+                        </div>
+                    `);
+                });
+
+                quizContainer.append('<button class="quiz-btn" id="submit-quiz">Submit Quiz</button>');
+            }
+
+            $("body").on("click", "#submit-quiz", function () {
+                var score = 0;
+                var totalQuestions = quizData[selectedSubject].length;
+                var selectedSubjectQuiz = quizData[selectedSubject];
+
+                selectedSubjectQuiz.forEach(function(item, index) {
+                    var selectedOption = $(`input[name="q${index}"]:checked`).val();
+                    var correctAnswer = item.correct;
+                    if (selectedOption === correctAnswer) {
+                        score++;
+                    }
+                });
+
+                var grade = (score / totalQuestions) * 100;
+
+                // Save grade in localStorage
+                var grades = JSON.parse(localStorage.getItem("grades")) || [];
+                grades.push({ subject: selectedSubject, grade: grade.toFixed(2) });
+                localStorage.setItem("grades", JSON.stringify(grades));
+
+                $(".quiz-section").hide();
+                $(".feedback-section").show().html(`
+                    <p>Your grade: ${grade.toFixed(2)}%</p>
+                    <p>You scored ${score} out of ${totalQuestions}.</p>
+                `);
+            });
+        });
+    </script>
+</head>
+<body>
+
+<header>
+    <div class="logo">Adaptive Learning Platform</div>
+    <nav>
+        <a href="index.html">Home</a>
+            <a href="subjects.html">Subject</a>
+            <a href="chatbot.html">Chatbot</a>
+            <a href="about.html">About Us</a>
+    </nav>
+</header>
+
+<main>
+    <section class="subjects-section">
+        <h2>Explore Subjects</h2>
+        <p>Select a subject to start learning:</p>
+        <button class="subject-btn">Business</button>
+        <button class="subject-btn">Engineering</button>
+        <button class="subject-btn">Computer Science</button>
+    </section>
+
+    <section class="quiz-section"></section>
+    <section class="feedback-section"></section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Adaptive Learning Platform. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Grades</title>
+
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            padding-top: 5rem; /* Space for fixed navbar */
+        }
+
+        /* Navbar Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Subject Dropdown */
+        nav select {
+            padding: 0.5rem;
+            font-size: 1.1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            margin-top: 2rem;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 2rem;
+            padding: 1rem 0;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table th, table td {
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav a {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+
+            nav select {
+                margin-left: 0;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">Adaptive Learning Platform</div>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="subjects.html">Subject</a>
+            <a href="chatbot.html">Chatbot</a>
+            <a href="about.html">About Us</a>
+
+            <!-- Subject Dropdown -->
+            <select id="subject-dropdown" onchange="filterGradesBySubject()">
+                <option value="">Select Subject</option>
+                <option value="Business">Business</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Computer Science">Computer Science</option>
+            </select>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <h1>Grades</h1>
+
+    <table id="grades-table">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Grade (%)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Grades will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Adaptive Learning Platform. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to display the grades when the page is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get grades from local storage (if available)
+            var grades = JSON.parse(localStorage.getItem("grades")) || [];
+
+            // Store grades in global variable for later filtering
+            window.grades = grades;
+
+            // Call function to display all grades initially
+            displayGrades(grades);
+        });
+
+        // Function to display grades in the table
+        function displayGrades(grades) {
+            var tableBody = document.getElementById("grades-table").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ""; // Clear the table before inserting
+
+            grades.forEach(function(gradeData) {
+                var row = tableBody.insertRow();
+                row.innerHTML = `<td>${gradeData.subject}</td><td>${gradeData.grade}</td>`;
+            });
+        }
+
+        // Function to filter grades by subject based on the dropdown selection
+        function filterGradesBySubject() {
+            var selectedSubject = document.getElementById("subject-dropdown").value;
+
+            if (selectedSubject) {
+                // Filter grades by selected subject
+                var filteredGrades = window.grades.filter(function(gradeData) {
+                    return gradeData.subject === selectedSubject;
+                });
+                displayGrades(filteredGrades); // Display filtered grades
+            } else {
+                // Display all grades if no subject is selected
+                displayGrades(window.grades);
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Adaptive Learning Platform</title>
+
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Body Styles */
+        body {
+            background-color: #f7f7f7;
+            color: #333;
+            font-size: 16px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px; /* to account for fixed header */
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-section a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .about-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Call to Action Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 0.8rem 1.6rem;
+            }
+
+            .about-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-section p {
+                font-size: 1rem;
+            }
+
+            .cta-section {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Smooth scrolling for navigation links
+            $("nav a").click(function (e) {
+                e.preventDefault();
+                var target = $(this).attr("href");
+                $("html, body").animate({
+                    scrollTop: $(target).offset().top - 80
+                }, 800);
+            });
+            
+            // Call to Action Button Click
+            $(".cta-button").click(function () {
+                alert("Thank you for your interest! We will get back to you shortly.");
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Adaptive Learning Platform</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="subjects.html">Subjects</a>
+            <a href="chatbot.html">Chatbot</a>
+            <a href="about.html">About Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <h2>About Us</h2>
+            <p>At the Adaptive Learning Platform, we aim to empower learners through AI-driven education. Our platform offers personalized, multi-modal learning experiences designed to help you reach your goals. Whether you're a beginner or an expert, we are here to help you succeed in your learning journey.</p>
+            <p>We believe in using the power of technology to transform education, making it more accessible and efficient for everyone. Our mission is to provide tools that allow you to learn at your own pace, anytime, anywhere.</p>
+            <p>Contact us for more information at <a href="mailto:info@adaptivelearning.com">info@adaptivelearning.com</a></p>
+        </section>
+
+        <!-- Call to Action Section -->
+        <section class="cta-section">
+            <h2>Want to Learn More?</h2>
+            <p>We would love to hear from you! Whether you have questions or want to get started with our platform, feel free to get in touch.</p>
+            <button class="cta-button">Get in Touch</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Adaptive Learning Platform. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
