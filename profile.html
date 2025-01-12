@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Adaptive Learning Platform</title>
+
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        nav {
+            width: 100%;
+            background-color: #4CAF50;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            background-color: #fff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 80px; /* Offset for the fixed navbar */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .profile-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .profile-container p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .profile-container .logout-btn {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-container .logout-btn:hover {
+            background-color: #e64e4e;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Home</a>
+            <a href="subjects.html">Subject</a>
+            <a href="grades.html">Grades</a>
+            <a href="chatbot.html">Chatbot</a>
+            <a href="about.html">About Us</a>
+            <a href="login.html">Login</a>
+            <a href="profile.html">profile</a>
+    </nav>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <h2>Your Profile</h2>
+        <p><strong>Username:</strong> <span id="username"></span></p>
+        <p><strong>Faculty:</strong> <span id="faculty"></span></p>
+        <p><strong>Year:</strong> <span id="year"></span></p>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+
+        <footer>
+            <p>&copy; 2025 <a href="mailto:info@adaptivelearning.com">Adaptive Learning Platform</a>. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Check if the user is logged in
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (user) {
+                // Display user information
+                document.getElementById("username").textContent = user.username;
+                document.getElementById("faculty").textContent = user.faculty;
+                document.getElementById("year").textContent = user.year;
+            } else {
+                alert("You need to log in first.");
+                window.location.href = "login.html";
+            }
+        };
+
+        function logout() {
+            // Clear user session and redirect to login page
+            localStorage.removeItem("user");
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Adaptive Learning Platform</title>
+
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        nav {
+            width: 100%;
+            background-color: #4CAF50;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Container */
+        .login-container {
+            background-color: #fff;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin-top: 80px; /* Offset for the fixed navbar */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-container h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="text"]#faculty,
+        input[type="text"]#year {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="subjects.html">Subject</a>
+        <a href="grades.html">Grades</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="profile.html">profile</a>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Enter your username" required>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        
+        <!-- Add fields for faculty and year -->
+        <input type="text" id="faculty" placeholder="Enter your faculty" required>
+        <input type="text" id="year" placeholder="Enter your year" required>
+        
+        <button onclick="login()">Login</button>
+        
+        <footer>
+            <p>&copy; 2025 <a href="mailto:info@adaptivelearning.com">Adaptive Learning Platform</a>. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const faculty = document.getElementById("faculty").value;
+            const year = document.getElementById("year").value;
+
+            // Validate input
+            if (username && password && faculty && year) {
+                // Store user details in localStorage
+                localStorage.setItem("user", JSON.stringify({
+                    username: username,
+                    faculty: faculty,
+                    year: year
+                }));
+
+                // Redirect to the profile page
+                window.location.href = "profile.html";
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+    </script>
+</body>
+</html>
